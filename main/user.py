@@ -49,7 +49,11 @@ class Leilao:
         self._valor_atual = novo_valor
 
     def avaliador(self, valor, nome):
-        if valor > self.valor_atual:
+        if valor >= self.valor_atual and len(self.lista_lances) == 1:
+            self.valor_atual = valor
+            self.lista_lances.append((valor, nome))
+            return True
+        elif len(self.lista_lances) > 1 and valor > self.valor_atual:
             self.valor_atual = valor
             self.lista_lances.append((valor, nome))
             return True
